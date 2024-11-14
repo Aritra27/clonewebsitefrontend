@@ -17,7 +17,7 @@ const ChatPage = () => {
 
   const sendMessageHandler = async (receiverId) => {
     try {
-      const res = await axios.post(`http://localhost:8000/api/v1/message/send/${receiverId}`, { textMessage },
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/message/send/${receiverId}`, { textMessage },
         {
           headers: {
             'Content-Type': "application/json"
@@ -28,7 +28,7 @@ const ChatPage = () => {
       console.log(res);
       if (res.data.success) {
         console.log("first")
-        dispatch(setMessages([...messages, res.data.newMessage]));
+        dispatch(setMessages([...messages, res.data?.newMessage]));
         console.log("second")
         setTextMessage('');
       }

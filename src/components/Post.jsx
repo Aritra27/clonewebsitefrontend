@@ -36,9 +36,9 @@ const Post = ({ post }) => {
     const likeOrDislikeHandler = async () => {
         try {
             const action = liked ? 'dislike' : 'like';
-            const res = await axios.get(`http://localhost:8000/api/v1/post/${post._id}/${action}`, { withCredentials: true })
+            const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/post/${post._id}/${action}`, { withCredentials: true })
             console.log(res);
-            if (res.data.success) {
+            if (res.data?.success) {
                 const updatedLikes = liked ? postLike - 1 : postLike + 1
                 setPostLike(updatedLikes)
                 setLiked(!liked);
@@ -60,7 +60,7 @@ const Post = ({ post }) => {
     const commentHandler = async () => {
         try {
             console.log(text)
-            const res = await axios.post(`http://localhost:8000/api/v1/post/${post?._id}/comment`, { text },
+            const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/post/${post?._id}/comment`, { text },
                 { headers: { "Content-Type": "application/json" }, withCredentials: true })
             if (res.data.success) {
                 const updatedCommentData = [...comment, res.data.comment]
@@ -80,7 +80,7 @@ const Post = ({ post }) => {
     const deletePostHandler = async () => {
         try {
             console.log(post._id)
-            const res = await axios.delete(`http://localhost:8000/api/v1/post/delete/${post._id}`, { withCredentials: true })
+            const res = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/post/delete/${post._id}`, { withCredentials: true })
             if (res.data.sucess) {
                 const updatedPostData = posts.filter((postItem) => postItem._id !== post?._id)
                 dispatch(setPosts(updatedPostData));

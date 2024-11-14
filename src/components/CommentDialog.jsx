@@ -40,7 +40,7 @@ const CommentDialog = ({ open, setOpen }) => {
     const sendMessageHandler = async () => {
         try {
             console.log(text)
-            const res = await axios.post(`http://localhost:8000/api/v1/post/${selectedPost?._id}/comment`, { text },
+            const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/post/${selectedPost?._id}/comment`, { text },
                 { headers: { "Content-Type": "application/json" }, withCredentials: true })
             if (res.data.success) {
                 const updatedCommentData = [...comment, res.data.comment]
