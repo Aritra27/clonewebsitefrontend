@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { Button } from './components/ui/button'
-import Signup from './components/signup'
+import Signup from './components/Signup'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/Login'
 import Home from './components/Home'
